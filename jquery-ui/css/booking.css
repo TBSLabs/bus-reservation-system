@@ -1,0 +1,23 @@
+.seat-panel{
+	margin: auto;
+    float: left;
+    padding-left: 27%;
+}
+div .seatCharts-seat{
+	width: 32px;
+    height: 30px;	
+}
+.seatCharts-row div:first-child{
+	display: none;
+}
+.seatCharts-row div:nth-child(even){
+	width: 30px;
+}
+div.seatCharts-seat.selected{
+	background: black;
+}
+.booking-details{
+	margin: auto;
+    float: right;
+    padding-right: 29%;
+}

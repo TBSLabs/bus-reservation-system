@@ -4,16 +4,18 @@
 <html>
 	<head>
 		<title>JSC Demo</title>
-		
-		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="./jquery.seat-charts.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="css/lib/jquery.seat-charts.css">
+		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="css/booking.css">
 	</head>
 	
 	<body>
 		<div class="wrapper">
 			<div class="container">
-				<div id="seat-map">
+				<div id="seat-map" class="seat-panel">
 					<div class="front-indicator">Front</div>
 					
 				</div>
@@ -32,13 +34,16 @@
 			</div>
 		</div>
 		
-		<script src="./jquery-1.11.0.min.js"></script>
-		<script src="./jquery.seat-charts.js"></script>
+		<script src="js/lib/jquery-1.11.0.min.js"></script>
+		<script src="js/lib/jquery.seat-charts.js"></script>
+		<script src="js/lib/bootstrap.js"></script>
+		<script src="js/lib/bootstrap.min.js"></script>
+		<script src="js/lib/angular.min.js"></script>
+		<script src="js/booking.js"></script>
 		
 		<script>
 			var firstSeatLabel = 1;
-		
-			$(document).ready(function() {
+$(document).ready(function() {
 				var $cart = $('#selected-seats'),
 					$counter = $('#counter'),
 					$total = $('#total'),
@@ -126,8 +131,8 @@
 				});
 
 				//let's pretend some seats have already been booked
-				sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
-		
+				sc.get(['1_2', '4_1', '7_1', '8_2']).status('unavailable');
+
 		});
 
 		function recalculateTotal(sc) {
@@ -140,7 +145,7 @@
 			
 			return total;
 		}
-		
+			
 		</script>
 	</body>
 </html>
