@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+ 
+    <appender name="fileAppender" class="org.apache.log4j.FileAppender">
+        <param name="File" value="${catalina.home}/logs/Booking.log" />
+        <param name="MaxFileSize" value="10MB" />
+        <param name="MaxBackupIndex" value="50" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-7p %d [%t] %c %x - %m%n" />
+        </layout>
+ 
+    </appender>
+ 
+    <!-- package level log levels can be define -->
+    <category name="org.ticketbooking">
+        <priority value="ALL" />
+    </category>
+ 
+ 
+    <!-- Root Logger trace/debug/info/warn/error/fatal/off> -->
+    <root>
+        <appender-ref ref="fileAppender" />
+    </root>
+ 
+</log4j:configuration>

@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.ticketbooking</groupId>
+		<artifactId>TicketBookingSystem</artifactId>
+		<version>1.0RC</version>
+	</parent>
+	<artifactId>booking-site</artifactId>
+	<packaging>war</packaging>
+	<name>Booking Site App</name>
+	<description>Booking Site App</description>
+	<dependencies>
+		<dependency>
+			<artifactId>booking-core</artifactId>
+			<groupId>org.ticketbooking</groupId>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>ROOT</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<server>tomcat</server>
+					<path>/</path>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
