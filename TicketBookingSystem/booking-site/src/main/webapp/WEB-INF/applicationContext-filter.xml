@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+
+    <bean id="openEntityManagerInViewFilter" class="org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter"/>
+
+    <bean id="tbsPreSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map request-matcher="ant">        
+            <sec:filter-chain pattern="/**" filters="
+                openEntityManagerInViewFilter" />
+        </sec:filter-chain-map>
+    </bean>
+<!-- 
+    <bean id="blPostSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map request-matcher="ant">
+            <sec:filter-chain pattern="/**" filters="
+               resourceUrlEncodingFilter,
+               blRequestFilter,
+               blCustomerStateFilter,
+               blTranslationFilter,
+               blCartStateFilter,
+               blURLHandlerFilter"/>
+        </sec:filter-chain-map>
+    </bean>
+    
+    <bean id="blRestPreSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map request-matcher="ant">        
+            <sec:filter-chain pattern="/api/**" filters="
+               blStatelessSessionFilter,
+               openEntityManagerInViewFilter,
+               blRequestFilter"/>
+        </sec:filter-chain-map>
+    </bean>
+
+    <bean id="blRestPostSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map request-matcher="ant">
+            <sec:filter-chain pattern="/api/**" filters="
+               blURLHandlerFilter,
+               blTranslationFilter,
+               blCartStateFilter"/>
+        </sec:filter-chain-map>
+    </bean>
+ -->
+</beans>

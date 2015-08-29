@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd 
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security-3.2.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns="http://www.springframework.org/schema/security">
+
+	<!-- Enabling Basic Authentication -->
+	<http>
+		<intercept-url pattern="/*" access="ROLE_USER" />
+		<http-basic />
+	</http>
+	
+	<authentication-manager>
+	   <authentication-provider>
+	       <user-service>
+		   	<user name="user" password="user" authorities="ROLE_USER" />
+	       </user-service>
+	   </authentication-provider>
+	</authentication-manager>
+
+	<!-- Configure Authentication mechanism -->
+	<!-- <beans:bean	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder" />
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="customUserDetailsService" />
+	</authentication-manager>
+	secure the application´s urls with the specific Role
+	<http access-denied-page="/accessdenied" use-expressions="true"	auto-config="false">
+		<intercept-url access="permitAll" pattern="/user/login" />
+		<intercept-url access="permitAll" pattern="/user/logout" />
+		<intercept-url access="permitAll" pattern="/" />
+		<intercept-url access="permitAll" pattern="/product/**" />
+		<intercept-url access="hasRole('ROLE_USER')" pattern="/buy-now/**" />
+		<intercept-url access="hasRole('ROLE_USER')" pattern="/view-orders/**" />
+		<intercept-url access="hasRole('ROLE_USER')" pattern="/rating/**" />
+		<intercept-url access="permitAll" pattern="/" />
+		<form-login authentication-failure-url="/error" default-target-url="/order" 
+			login-page="/user/login" username-parameter="username" password-parameter="password"/> 
+			<logout logout-success-url="/user/logout" />
+	</http> -->
+
+</beans:beans>

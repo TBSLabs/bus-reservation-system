@@ -14,6 +14,7 @@ public class CheckBookingStatus {
 	
 	@GET
 	public Response checkBooking(){
+		System.out.println("Ser");
 		LOGGER.info("CheckBookingStatus - started");
 		return Response.status(Status.ACCEPTED)
 				.entity("App is up")
