@@ -16,6 +16,11 @@ import org.ticketbooking.core.helper.AddressHelper;
 import org.ticketbooking.core.helper.LinksHelper;
 import org.ticketbooking.core.service.customer.CustomerService;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+
+@Api(value="CustomerDetails",description="Service to get the details about Customer")
 @RestController
 @RequestMapping("/user")
 public class CustomerController {
@@ -27,14 +32,16 @@ public class CustomerController {
 	@Resource(name="addressHelper")
 	AddressHelper addressHelper;
 	
-	@RequestMapping(value="/{username}",produces="{application/json,application/xml}",method=RequestMethod.GET)
-	public UserDetails getUserDetails(@PathVariable("username") String username){
+	@ApiOperation(httpMethod="GET",responseClass="UserDetails",value="will retrive all the details about the customer based on the username provided")
+	@RequestMapping(value="/{username}",produces={"application/json","application/xml"},method=RequestMethod.GET)
+	public UserDetails getUserDetails(@ApiParam(name="username",value="Username of the customer",required=true)@PathVariable("username") String username){
 		UserDetails userDetails = new UserDetails();
 		Customer customer = customerService.findCustomerByUserName(username);
 		List<Address> addresses = new ArrayList<Address>();
-		for (org.ticketbooking.core.domain.user.Address address : customer.getAddresses()) {
+		//TODO To Implement Address with Customer
+		/*for (org.ticketbooking.core.domain.user.Address address : customer.getAddresses()) {
 			addresses.add(addressHelper.convertAddress(address));
-		}
+		}*/
 		userDetails.setAddresses(addresses);
 		userDetails.setEmail(customer.getEmail());
 		userDetails.setFirstName(customer.getFirstName());

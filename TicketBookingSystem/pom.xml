@@ -234,7 +234,13 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
-				<version>4.2.0.Final</version>
+				<version>5.2.1.Final</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.fasterxml</groupId>
+						<artifactId>classmate</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate.common</groupId>
@@ -264,7 +270,17 @@
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet.api.version}</version>
 			</dependency>
-
+			<!-- Swagger -->
+			<dependency>
+				<groupId>com.mangofactory</groupId>
+				<artifactId>swagger-springmvc</artifactId>
+				<version>0.5.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml</groupId>
+				<artifactId>classmate</artifactId>
+				<version>0.8.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>

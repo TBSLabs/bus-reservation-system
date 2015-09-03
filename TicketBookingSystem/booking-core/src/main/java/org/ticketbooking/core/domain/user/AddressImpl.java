@@ -1,32 +1,31 @@
 package org.ticketbooking.core.domain.user;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import org.ticketbooking.core.domain.common.audit.Auditable;
+import org.ticketbooking.core.domain.common.listener.AuditableListener;
 
 @Entity
+@EntityListeners(value=AuditableListener.class)
 @Table(name="TBS_ADDRESS")
-@NamedQueries(value={
-		@NamedQuery(name="AddressImpl.fetchByCustomer",query="from AddressImpl a where a.customer.id=:id")
-})
-public class AddressImpl implements Serializable,Address{
+public class AddressImpl implements Address{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Embedded
+	protected Auditable auditable = new Auditable();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -42,21 +41,16 @@ public class AddressImpl implements Serializable,Address{
 	@Column(name="TBS_ADDRESS_PIN")
 	private Long pin;
 	
-	@Column(name="TBS_ADDRESS_CREATED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
+	@Column(name="TBS_DEFAULT_ADDRESS")
+	private boolean isDefaultAddress;
 	
-	@Column(name="TBS_ADDRESS_UPDATED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedDate;
+	@Column(name="TBS_ACTIVE_ADDRESS")
+	private boolean isActiveAddress;
 	
 	@ManyToOne
 	@JoinColumn(name="TBS_STATE_ID",nullable=false)
 	private StateImpl state;
 	
-	@ManyToOne
-	@JoinColumn(name="TBS_CUSTOMER_ID")
-	private CustomerImpl customer;
 
 	public Long getId() {
 		return id;
@@ -90,22 +84,6 @@ public class AddressImpl implements Serializable,Address{
 		this.pin = pin;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
 	public State getState() {
 		return state;
 	}
@@ -114,21 +92,102 @@ public class AddressImpl implements Serializable,Address{
 		this.state = state;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	
+	public Auditable getAudit() {
+		return auditable;
 	}
 
-	public void setCustomer(CustomerImpl customer) {
-		this.customer = customer;
+	public void setAudit(Auditable audit) {
+		this.auditable = audit;
+	}
+
+	public boolean isDefaultAddress() {
+		return isDefaultAddress;
+	}
+
+	public void setDefaultAddress(boolean isDefaultAddress) {
+		this.isDefaultAddress = isDefaultAddress;
+	}
+
+	public boolean isActiveAddress() {
+		return isActiveAddress;
+	}
+
+	public void setActiveAddress(boolean isActiveAddress) {
+		this.isActiveAddress = isActiveAddress;
 	}
 
 	@Override
 	public String toString() {
-		return "AddressImpl [id=" + id + ", street1=" + street1 + ", stree2="
-				+ stree2 + ", pin=" + pin + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + ", state=" + state
-				+ ", customer=" + customer + "]";
+		return "AddressImpl [audit=" + auditable + ", id=" + id + ", street1="
+				+ street1 + ", stree2=" + stree2 + ", pin=" + pin
+				+ ", isDefaultAddress=" + isDefaultAddress
+				+ ", isActiveAddress=" + isActiveAddress + ", state=" + state
+				+ "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((auditable == null) ? 0 : auditable.hashCode());
+		
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isActiveAddress ? 1231 : 1237);
+		result = prime * result + (isDefaultAddress ? 1231 : 1237);
+		result = prime * result + ((pin == null) ? 0 : pin.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((stree2 == null) ? 0 : stree2.hashCode());
+		result = prime * result + ((street1 == null) ? 0 : street1.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AddressImpl other = (AddressImpl) obj;
+		if (auditable == null) {
+			if (other.auditable != null)
+				return false;
+		} else if (!auditable.equals(other.auditable))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (isActiveAddress != other.isActiveAddress)
+			return false;
+		if (isDefaultAddress != other.isDefaultAddress)
+			return false;
+		if (pin == null) {
+			if (other.pin != null)
+				return false;
+		} else if (!pin.equals(other.pin))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		if (stree2 == null) {
+			if (other.stree2 != null)
+				return false;
+		} else if (!stree2.equals(other.stree2))
+			return false;
+		if (street1 == null) {
+			if (other.street1 != null)
+				return false;
+		} else if (!street1.equals(other.street1))
+			return false;
+		return true;
+	}
+	
 	
 	
 }

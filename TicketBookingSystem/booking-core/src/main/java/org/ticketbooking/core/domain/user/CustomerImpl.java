@@ -1,32 +1,34 @@
 package org.ticketbooking.core.domain.user;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
-
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import org.ticketbooking.core.domain.common.audit.Auditable;
+import org.ticketbooking.core.domain.common.listener.AuditableListener;
 
 @Entity
+@EntityListeners(value=AuditableListener.class)
 @Table(name="TBS_CUSTOMER")
 @NamedQueries(value={
 		@NamedQuery(name="CustomerImpl.fetchByUsername",query="from CustomerImpl c where c.username=:username")
 })
-public class CustomerImpl implements Serializable,Customer{
+public class CustomerImpl implements Customer{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Embedded
+	protected Auditable auditable = new Auditable();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -54,16 +56,9 @@ public class CustomerImpl implements Serializable,Customer{
 	@Column(name="TBS_CUSTOMER_PHONE")
 	private String phone;
 	
-	@Column(name="TBS_CUSTOMER_CREATED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
+	@Column(name="TBS_CUSTOMER_ACTIVE")
+	private boolean isActive;
 	
-	@Column(name="TBS_CUSTOMER_UPDATED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastUpdated;
-	
-	@OneToMany(mappedBy="customer")
-	private Set<AddressImpl> addresses;
 
 	public Long getId() {
 		return id;
@@ -129,56 +124,44 @@ public class CustomerImpl implements Serializable,Customer{
 		this.phone = phone;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
+
+	public Auditable getAudit() {
+		return auditable;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public void setAudit(Auditable audit) {
+		this.auditable = audit;
 	}
 
-	public Date getLastUpdated() {
-		return lastUpdated;
+	public boolean isActive() {
+		return isActive;
 	}
 
-	public void setLastUpdated(Date lastUpdated) {
-		this.lastUpdated = lastUpdated;
-	}
-
-	public Set<AddressImpl> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(Set<AddressImpl> addresses) {
-		this.addresses = addresses;
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
 	public String toString() {
-		return "CustomerImpl [id=" + id + ", username=" + username
-				+ ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", middleName=" + middleName
-				+ ", email=" + email + ", phone=" + phone + ", createdDate="
-				+ createdDate + ", lastUpdated=" + lastUpdated + ", addresses="
-				+ addresses + "]";
+		return "CustomerImpl [audit=" + auditable + ", id=" + id + ", username="
+				+ username + ", password=" + password + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", middleName="
+				+ middleName + ", email=" + email + ", phone=" + phone
+				+ ", isActive=" + isActive + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((addresses == null) ? 0 : addresses.hashCode());
-		result = prime * result
-				+ ((createdDate == null) ? 0 : createdDate.hashCode());
+		result = prime * result + ((auditable == null) ? 0 : auditable.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result
-				+ ((lastUpdated == null) ? 0 : lastUpdated.hashCode());
 		result = prime * result
 				+ ((middleName == null) ? 0 : middleName.hashCode());
 		result = prime * result
@@ -198,15 +181,10 @@ public class CustomerImpl implements Serializable,Customer{
 		if (getClass() != obj.getClass())
 			return false;
 		CustomerImpl other = (CustomerImpl) obj;
-		if (addresses == null) {
-			if (other.addresses != null)
+		if (auditable == null) {
+			if (other.auditable != null)
 				return false;
-		} else if (!addresses.equals(other.addresses))
-			return false;
-		if (createdDate == null) {
-			if (other.createdDate != null)
-				return false;
-		} else if (!createdDate.equals(other.createdDate))
+		} else if (!auditable.equals(other.auditable))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -223,15 +201,12 @@ public class CustomerImpl implements Serializable,Customer{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (isActive != other.isActive)
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (lastUpdated == null) {
-			if (other.lastUpdated != null)
-				return false;
-		} else if (!lastUpdated.equals(other.lastUpdated))
 			return false;
 		if (middleName == null) {
 			if (other.middleName != null)
@@ -255,6 +230,7 @@ public class CustomerImpl implements Serializable,Customer{
 			return false;
 		return true;
 	}
+
 	
 	
 		

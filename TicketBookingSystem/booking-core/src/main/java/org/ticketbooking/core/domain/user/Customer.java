@@ -1,9 +1,8 @@
 package org.ticketbooking.core.domain.user;
 
-import java.util.Date;
-import java.util.Set;
+import java.io.Serializable;
 
-public interface Customer {
+public interface Customer extends Serializable {
 	public Long getId();
 	public void setId(Long id);
 	public String getUsername();
@@ -20,10 +19,7 @@ public interface Customer {
 	public void setEmail(String email);
 	public String getPhone();
 	public void setPhone(String phone);
-	public Date getCreatedDate();
-	public void setCreatedDate(Date createdDate);
-	public Date getLastUpdated();
-	public void setLastUpdated(Date lastUpdated);
-	public Set<AddressImpl> getAddresses();
-	public void setAddresses(Set<AddressImpl> addresses);
+	public boolean isActive();
+	public void setActive(boolean isActive);
+
 }

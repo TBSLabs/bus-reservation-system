@@ -6,10 +6,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
+					/WEB-INF/applicationContext-filter.xml
 					classpath:applicationContext-core.xml
 					/WEB-INF/applicationContext.xml
 					/WEB-INF/applicationContext-security.xml
-					/WEB-INF/applicationContext-filter.xml
 		</param-value>
 	</context-param>
 	<listener>

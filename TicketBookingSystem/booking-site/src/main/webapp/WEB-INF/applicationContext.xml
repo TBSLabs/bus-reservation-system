@@ -19,18 +19,4 @@
 	<context:component-scan
 		base-package="org.ticketbooking.core.service,org.ticketbooking.core.dao" />
 	<context:component-scan base-package="org.ticketbooking.site.api.core,org.ticketbooking.site.api" />
-	
-	<!-- 
-	<bean id="marshallingConverter"
-		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-		<constructor-arg ref="jaxb" />
-		<property name="supportedMediaTypes" value="application/xml" />
-		<property name="marshaller" ref="jaxb" />
-		<property name="unmarshaller" ref="jaxb" />
-	</bean> -->
-	<oxm:jaxb2-marshaller id="marshaller">
-		<oxm:class-to-be-bound name="org.ticketbooking.core.api.jaxb.user.UserDetails"/>
-		<oxm:class-to-be-bound name="org.ticketbooking.core.api.jaxb.user.Address"/>
-		<oxm:class-to-be-bound name="org.ticketbooking.core.api.jaxb.other.Links"/>
-	</oxm:jaxb2-marshaller>
 </beans>

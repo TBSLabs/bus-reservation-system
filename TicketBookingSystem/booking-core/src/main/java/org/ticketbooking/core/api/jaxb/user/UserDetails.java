@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.ticketbooking.core.api.jaxb.other.Links;
 
 
+
 @XmlRootElement(name="user")
 public class UserDetails {
 	

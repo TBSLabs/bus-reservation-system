@@ -32,10 +32,10 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 
-	@Transactional(value="tbsTransaction",readOnly=true)
+	/*@Transactional(value="tbsTransaction",readOnly=true)
 	public List<AddressImpl> fetchAddressByCustomer(Long customerId) {
 		return addressDao.fetchAddressByCustomer(customerId);
-	}
+	}*/
 
 	@Transactional("tbsTransaction")
 	public void updateAddress(AddressImpl address) {

@@ -11,4 +11,17 @@
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 	<context:component-scan base-package="org.ticketbooking.site"/>
+	<mvc:annotation-driven/>
+	<context:annotation-config/>
+	<mvc:default-servlet-handler/>
+	<mvc:resources location="/rest-api-docs" mapping="/docs/index.html"/>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:swagger.properties</value>
+		</property>
+	</bean>
+	
+	<bean id="documentationConfig" class="com.mangofactory.swagger.configuration.DocumentationConfig"/>
+	
 </beans>
