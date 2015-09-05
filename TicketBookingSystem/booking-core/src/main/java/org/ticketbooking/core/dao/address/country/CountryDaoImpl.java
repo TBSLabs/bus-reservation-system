@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.ticketbooking.core.domain.user.Country;
 import org.ticketbooking.core.domain.user.CountryImpl;
 
 @Repository("countryDao")
@@ -13,7 +14,7 @@ public class CountryDaoImpl implements CountryDao{
 	@PersistenceContext
 	EntityManager entityManager;
 	
-	public void createCountry(CountryImpl country) {
+	public void createCountry(Country country) {
 		entityManager.persist(country);
 	}
 

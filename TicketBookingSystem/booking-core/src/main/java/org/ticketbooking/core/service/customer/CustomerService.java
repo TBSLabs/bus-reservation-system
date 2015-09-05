@@ -1,5 +1,6 @@
 package org.ticketbooking.core.service.customer;
 
+import org.ticketbooking.core.api.jaxb.user.UserDetails;
 import org.ticketbooking.core.domain.user.Customer;
 
 public interface CustomerService {
@@ -8,4 +9,5 @@ public interface CustomerService {
 	void deleteCustomer(Long id);
 	Customer findCustomerById(Long id);
 	Customer findCustomerByUserName(String username);
+	Customer performCustomerCreation(UserDetails userDetails);
 }

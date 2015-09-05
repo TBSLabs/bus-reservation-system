@@ -10,12 +10,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.ticketbooking.core.api.jaxb.user.Address;
 import org.ticketbooking.core.domain.other.LocaleImpl;
-import org.ticketbooking.core.domain.user.AddressImpl;
-import org.ticketbooking.core.domain.user.CountryImpl;
+import org.ticketbooking.core.domain.user.Country;
 import org.ticketbooking.core.domain.user.Customer;
-import org.ticketbooking.core.domain.user.CustomerAddressImpl;
-import org.ticketbooking.core.domain.user.CustomerImpl;
-import org.ticketbooking.core.domain.user.StateImpl;
+import org.ticketbooking.core.domain.user.CustomerAddress;
+import org.ticketbooking.core.domain.user.State;
+import org.ticketbooking.core.service.TRSEntityConfigurationService;
 import org.ticketbooking.core.service.address.AddressService;
 import org.ticketbooking.core.service.address.country.CountryService;
 import org.ticketbooking.core.service.address.state.StateService;
@@ -40,6 +39,9 @@ public class AddressHelper {
 	@Resource(name="customerService")
 	CustomerService customerService;
 	
+	@Resource(name="trsEntityConfigurationService")
+	TRSEntityConfigurationService configurationService;
+	
 	public Address convertAddress(org.ticketbooking.core.domain.user.Address address){
 		Address convertedAddress = new Address();
 		convertedAddress.setCountry(address.getState().getCountry().getName());
@@ -50,15 +52,15 @@ public class AddressHelper {
 		return convertedAddress;
 	}
 
-	public Set<AddressImpl> convertAddressEntity(List<Address> addresses) {
-		Set<AddressImpl> addresses2 = new HashSet<AddressImpl>();
+	public Set<org.ticketbooking.core.domain.user.Address> convertAddressEntity(List<Address> addresses) {
+		Set<org.ticketbooking.core.domain.user.Address> addresses2 = new HashSet<org.ticketbooking.core.domain.user.Address>();
 		for (Address address : addresses) {
-			AddressImpl address2 = new AddressImpl();
+			org.ticketbooking.core.domain.user.Address address2 = configurationService.createObjectByBeanId("org.ticketbooking.core.domain.user.Address");
 			address2.setPin(address.getPin());
 			address2.setStreet1(address.getStreet1());
 			address2.setStree2(address.getStreet2());
 			
-			CountryImpl country = new CountryImpl();
+			Country country = configurationService.createObjectByBeanId("org.ticketbooking.core.domain.user.Country");
 			country.setName(address.getCountry());
 			LocaleImpl locale = new LocaleImpl();
 			locale.setName("en-IN");
@@ -66,7 +68,7 @@ public class AddressHelper {
 			country.setLocale(locale);
 			countryService.createCountry(country);
 			
-			StateImpl state = new StateImpl();
+			State state = configurationService.createObjectByBeanId("org.ticketbooking.core.domain.user.State");
 			state.setName(address.getState());
 			state.setCountry(country);
 			stateService.createState(state);
@@ -79,11 +81,11 @@ public class AddressHelper {
 	}
 	
 	@Transactional("tbsTransaction")
-	public void createCustomerAddress(Customer customer,AddressImpl address){
-		CustomerAddressImpl customerAddress = new CustomerAddressImpl();
-		customerAddress.setCustomer((CustomerImpl) customerService.findCustomerById(customer.getId()));
+	public void createCustomerAddress(Customer customer,org.ticketbooking.core.domain.user.Address address){
+		CustomerAddress customerAddress = configurationService.createObjectByBeanId("org.ticketbooking.core.domain.user.CustomerAddress");
+		customerAddress.setCustomer(customerService.findCustomerById(customer.getId()));
 		customerAddress.setAddress(addressService.fetchAddress(address.getId()));
-		customerAddress.setAddressName("Address created for custoemr");
+		customerAddress.setAddressName("Address created for customer");
 		customerAddressService.createCustomerAddress(customerAddress);
 	}
 }

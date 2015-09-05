@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.ticketbooking.core.dao.customer.address.CustomerAddressDao;
-import org.ticketbooking.core.domain.user.CustomerAddressImpl;
+import org.ticketbooking.core.domain.user.CustomerAddress;
 
 @Service("customerAddressService")
 public class CustomerAddressServiceImpl implements CustomerAddressService{
@@ -14,7 +14,7 @@ public class CustomerAddressServiceImpl implements CustomerAddressService{
 	CustomerAddressDao addressDao;
 	
 	@Transactional("tbsTransaction")
-	public void createCustomerAddress(CustomerAddressImpl customerAddress){
+	public void createCustomerAddress(CustomerAddress customerAddress){
 		addressDao.createCustomerAddress(customerAddress);
 	}
 	

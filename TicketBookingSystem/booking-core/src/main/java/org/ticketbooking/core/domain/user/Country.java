@@ -1,7 +1,6 @@
 package org.ticketbooking.core.domain.user;
 
 import org.ticketbooking.core.domain.other.Locale;
-import org.ticketbooking.core.domain.other.LocaleImpl;
 
 public interface Country {
 	public Long getId();
@@ -9,7 +8,7 @@ public interface Country {
 	public String getName();
 	public void setName(String name);
 	public Locale getLocale();
-	public void setLocale(LocaleImpl locale);
+	public void setLocale(Locale locale);
 	public State getState();
-	public void setState(StateImpl state);
+	public void setState(State state);
 }

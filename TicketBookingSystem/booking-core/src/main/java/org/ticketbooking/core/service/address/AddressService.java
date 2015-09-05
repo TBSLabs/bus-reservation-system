@@ -1,11 +1,11 @@
 package org.ticketbooking.core.service.address;
 
-import org.ticketbooking.core.domain.user.AddressImpl;
+import org.ticketbooking.core.domain.user.Address;
 
 public interface AddressService {
-	void createAddress(AddressImpl address);
+	void createAddress(Address address);
 	void deleteAddress(Long id);
-	AddressImpl fetchAddress(Long id);
+	Address fetchAddress(Long id);
 //	List<AddressImpl> fetchAddressByCustomer(Long customerId);
-	void updateAddress(AddressImpl address);
+	void updateAddress(Address address);
 }

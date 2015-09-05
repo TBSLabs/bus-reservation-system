@@ -12,7 +12,7 @@ public interface Address extends Serializable{
 	public Long getPin();
 	public void setPin(Long pin);
 	public State getState();
-	public void setState(StateImpl state);
+	public void setState(State state);
 	public boolean isDefaultAddress();
 	public void setDefaultAddress(boolean isDefaultAddress);
 	public boolean isActiveAddress();

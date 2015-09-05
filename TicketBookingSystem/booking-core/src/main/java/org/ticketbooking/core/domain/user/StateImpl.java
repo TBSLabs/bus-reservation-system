@@ -36,12 +36,12 @@ public class StateImpl implements Serializable,State{
 	@Column(name="TBS_STATE_NAME")
 	private String name;
 	
-	@OneToOne(cascade=CascadeType.REFRESH)
+	@OneToOne(cascade=CascadeType.REFRESH,targetEntity=CountryImpl.class)
 	@PrimaryKeyJoinColumn
-	private CountryImpl country;
+	private Country country;
 	
-	@OneToMany(mappedBy="state")
-	private Set<AddressImpl> addresses;
+	@OneToMany(mappedBy="state",targetEntity=AddressImpl.class)
+	private Set<Address> addresses;
 
 	public Long getId() {
 		return id;
@@ -63,15 +63,15 @@ public class StateImpl implements Serializable,State{
 		return country;
 	}
 
-	public void setCountry(CountryImpl country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 
-	public Set<AddressImpl> getAddresses() {
+	public Set<Address> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(Set<AddressImpl> addresses) {
+	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 

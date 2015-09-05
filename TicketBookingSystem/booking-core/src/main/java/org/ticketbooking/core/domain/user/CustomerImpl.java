@@ -59,6 +59,9 @@ public class CustomerImpl implements Customer{
 	@Column(name="TBS_CUSTOMER_ACTIVE")
 	private boolean isActive;
 	
+	@Column(name="TBS_CUSTOMER_VARIFIED")
+	private boolean isVarified;
+	
 
 	public Long getId() {
 		return id;
@@ -141,25 +144,36 @@ public class CustomerImpl implements Customer{
 		this.isActive = isActive;
 	}
 
+	public boolean isVarified() {
+		return isVarified;
+	}
+
+	public void setVarified(boolean isVarified) {
+		this.isVarified = isVarified;
+	}
+
 	@Override
 	public String toString() {
-		return "CustomerImpl [audit=" + auditable + ", id=" + id + ", username="
-				+ username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", middleName="
-				+ middleName + ", email=" + email + ", phone=" + phone
-				+ ", isActive=" + isActive + "]";
+		return "CustomerImpl [auditable=" + auditable + ", id=" + id
+				+ ", username=" + username + ", password=" + password
+				+ ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", middleName=" + middleName + ", email=" + email
+				+ ", phone=" + phone + ", isActive=" + isActive
+				+ ", isVarified=" + isVarified + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((auditable == null) ? 0 : auditable.hashCode());
+		result = prime * result
+				+ ((auditable == null) ? 0 : auditable.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (isActive ? 1231 : 1237);
+		result = prime * result + (isVarified ? 1231 : 1237);
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result
@@ -203,6 +217,8 @@ public class CustomerImpl implements Customer{
 			return false;
 		if (isActive != other.isActive)
 			return false;
+		if (isVarified != other.isVarified)
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
@@ -230,8 +246,7 @@ public class CustomerImpl implements Customer{
 			return false;
 		return true;
 	}
+	
+	
 
-	
-	
-		
 }

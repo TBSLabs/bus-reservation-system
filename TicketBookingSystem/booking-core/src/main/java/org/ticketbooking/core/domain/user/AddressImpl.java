@@ -47,9 +47,9 @@ public class AddressImpl implements Address{
 	@Column(name="TBS_ACTIVE_ADDRESS")
 	private boolean isActiveAddress;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity=StateImpl.class)
 	@JoinColumn(name="TBS_STATE_ID",nullable=false)
-	private StateImpl state;
+	private State state;
 	
 
 	public Long getId() {
@@ -88,7 +88,7 @@ public class AddressImpl implements Address{
 		return state;
 	}
 
-	public void setState(StateImpl state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 

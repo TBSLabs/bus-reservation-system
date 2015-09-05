@@ -23,7 +23,7 @@ import com.wordnik.swagger.annotations.ApiParam;
 @Api(value="CustomerDetails",description="Service to get the details about Customer")
 @RestController
 @RequestMapping("/user")
-public class CustomerController {
+public class CustomerController extends AbstractCustomerController{
 
 	@Resource(name="customerService")
 	CustomerService customerService;
@@ -50,6 +50,7 @@ public class CustomerController {
 		userDetails.setUserName(customer.getUsername());
 		userDetails.setPhone(customer.getPhone());
 		userDetails.setLinks(LinksHelper.createUserLinks(customer.getUsername()));
+		
 		return userDetails;
 	}
 	

@@ -8,7 +8,7 @@ public interface State {
 	public String getName();
 	public void setName(String name);
 	public Country getCountry();
-	public void setCountry(CountryImpl country);
-	public Set<AddressImpl> getAddresses();
-	public void setAddresses(Set<AddressImpl> addresses);
+	public void setCountry(Country country);
+	public Set<Address> getAddresses();
+	public void setAddresses(Set<Address> addresses);
 }

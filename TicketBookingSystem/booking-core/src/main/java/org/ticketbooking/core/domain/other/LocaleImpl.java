@@ -1,7 +1,5 @@
 package org.ticketbooking.core.domain.other;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +14,7 @@ import org.ticketbooking.core.domain.user.CountryImpl;
 
 @Entity
 @Table(name="TBS_LOCALE")
-public class LocaleImpl implements Serializable,Locale{	
+public class LocaleImpl implements Locale{	
 	/**
 	 * 
 	 */
@@ -33,9 +31,9 @@ public class LocaleImpl implements Serializable,Locale{
 	@Column(name="TBS_LOCALE_TIMEZONE")
 	private String timeZone;
 	
-	@OneToOne
+	@OneToOne(targetEntity=CountryImpl.class)
 	@PrimaryKeyJoinColumn
-	CountryImpl country;
+	Country country;
 	
 	public Long getId() {
 		return id;
@@ -58,7 +56,7 @@ public class LocaleImpl implements Serializable,Locale{
 	public Country getCountry() {
 		return country;
 	}
-	public void setCountry(CountryImpl country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 	

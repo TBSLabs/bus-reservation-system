@@ -36,11 +36,11 @@ public class CountryImpl implements Serializable,Country{
 	@Column(name="TBS_COUNTRY_NAME",unique=true)
 	private String name;
 	
-	@OneToOne(mappedBy="country",cascade=CascadeType.ALL)
-	private LocaleImpl locale;
+	@OneToOne(mappedBy="country",cascade=CascadeType.ALL,targetEntity=LocaleImpl.class)
+	private Locale locale;
 	
-	@OneToOne(mappedBy="country",cascade=CascadeType.ALL)
-	private StateImpl state;
+	@OneToOne(mappedBy="country",cascade=CascadeType.ALL,targetEntity=StateImpl.class)
+	private State state;
 
 	public Long getId() {
 		return id;
@@ -62,7 +62,7 @@ public class CountryImpl implements Serializable,Country{
 		return locale;
 	}
 
-	public void setLocale(LocaleImpl locale) {
+	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
 
@@ -70,7 +70,7 @@ public class CountryImpl implements Serializable,Country{
 		return state;
 	}
 
-	public void setState(StateImpl state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 

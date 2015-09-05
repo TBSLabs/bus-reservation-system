@@ -1,0 +1,29 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+
+	<bean id="customerMailActivity" class="org.ticketbooking.core.workflow.activity.customer.CustomerMailSendingActivity" />
+	<bean id="customerInfoSharingActivity" class="org.ticketbooking.core.workflow.activity.customer.CustomerInfoToVendorActivity" />
+	<bean id="customerWorkflow"
+		class="org.ticketbooking.core.workflow.processor.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="customerMailActivity"/>
+				<ref bean="customerInfoSharingActivity"/>
+			</list>
+		</property>
+	</bean>
+</beans>

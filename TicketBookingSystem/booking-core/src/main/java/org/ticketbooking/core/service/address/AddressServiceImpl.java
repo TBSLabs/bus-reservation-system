@@ -1,13 +1,11 @@
 package org.ticketbooking.core.service.address;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.ticketbooking.core.dao.address.AddressDao;
-import org.ticketbooking.core.domain.user.AddressImpl;
+import org.ticketbooking.core.domain.user.Address;
 
 @Service("addressService")
 public class AddressServiceImpl implements AddressService{
@@ -16,7 +14,7 @@ public class AddressServiceImpl implements AddressService{
 	AddressDao addressDao;
 	
 	@Transactional("tbsTransaction")
-	public void createAddress(AddressImpl address) {
+	public void createAddress(Address address) {
 		addressDao.createAddress(address);
 	}
 
@@ -27,7 +25,7 @@ public class AddressServiceImpl implements AddressService{
 
 
 	@Transactional(value="tbsTransaction",readOnly=true)
-	public AddressImpl fetchAddress(Long id) {
+	public Address fetchAddress(Long id) {
 		return addressDao.fetchAddress(id);
 	}
 
@@ -38,7 +36,7 @@ public class AddressServiceImpl implements AddressService{
 	}*/
 
 	@Transactional("tbsTransaction")
-	public void updateAddress(AddressImpl address) {
+	public void updateAddress(Address address) {
 		addressDao.updateAddress(address);
 	}
 

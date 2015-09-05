@@ -21,5 +21,6 @@ public interface Customer extends Serializable {
 	public void setPhone(String phone);
 	public boolean isActive();
 	public void setActive(boolean isActive);
-
+	public boolean isVarified();
+	public void setVarified(boolean isVarified);
 }

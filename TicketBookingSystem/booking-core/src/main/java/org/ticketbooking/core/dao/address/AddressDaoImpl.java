@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.ticketbooking.core.domain.user.Address;
 import org.ticketbooking.core.domain.user.AddressImpl;
 
 @Repository("addressDao")
@@ -12,16 +13,16 @@ public class AddressDaoImpl implements AddressDao{
 	@PersistenceContext
 	EntityManager entityManager;
 
-	public void createAddress(AddressImpl address) {
+	public void createAddress(Address address) {
 		entityManager.persist(address);
 	}
 
 	public void deleteAddress(Long id) {
-		AddressImpl address = fetchAddress(id);
+		Address address = fetchAddress(id);
 		entityManager.remove(address);
 	}
 
-	public AddressImpl fetchAddress(Long id) {
+	public Address fetchAddress(Long id) {
 		return entityManager.find(AddressImpl.class, id);
 	}
 
@@ -32,7 +33,7 @@ public class AddressDaoImpl implements AddressDao{
 		return query.getResultList();
 	}*/
 
-	public void updateAddress(AddressImpl address) {
+	public void updateAddress(Address address) {
 		entityManager.merge(address);
 	}
 

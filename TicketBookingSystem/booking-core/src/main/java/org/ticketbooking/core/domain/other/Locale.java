@@ -1,10 +1,11 @@
 package org.ticketbooking.core.domain.other;
 
+import java.io.Serializable;
+
 import org.ticketbooking.core.domain.user.Country;
-import org.ticketbooking.core.domain.user.CountryImpl;
 
 
-public interface Locale {
+public interface Locale extends Serializable{
 	public Long getId();
 	public void setId(Long id);
 	public String getName();
@@ -12,5 +13,5 @@ public interface Locale {
 	public String getTimeZone();
 	public void setTimeZone(String timeZone);
 	public Country getCountry();
-	public void setCountry(CountryImpl country);
+	public void setCountry(Country country);
 }

@@ -4,15 +4,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.ticketbooking.core.domain.user.CustomerAddressImpl;
+import org.ticketbooking.core.domain.user.CustomerAddress;
 
 @Repository("customerAddressDao")
 public class CustomerAddressDaoImpl implements CustomerAddressDao{
 	
 	@PersistenceContext
 	EntityManager entityManager;
-	
-	public void createCustomerAddress(CustomerAddressImpl customerAddress){
+
+	public void createCustomerAddress(CustomerAddress customerAddress) {
 		entityManager.persist(customerAddress);
 	}
+
+	
+	
 }

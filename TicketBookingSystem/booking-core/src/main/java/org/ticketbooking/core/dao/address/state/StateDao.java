@@ -1,9 +1,9 @@
 package org.ticketbooking.core.dao.address.state;
 
-import org.ticketbooking.core.domain.user.StateImpl;
+import org.ticketbooking.core.domain.user.State;
 
 public interface StateDao {
-	void createState(StateImpl state);
-	StateImpl fetchState(Long id);
-	StateImpl fetchStateByName(String name);
+	void createState(State state);
+	State fetchState(Long id);
+	State fetchStateByName(String name);
 }

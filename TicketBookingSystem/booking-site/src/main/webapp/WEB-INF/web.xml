@@ -8,6 +8,9 @@
 		<param-value>
 					/WEB-INF/applicationContext-filter.xml
 					classpath:applicationContext-core.xml
+					classpath:applicationContext-domain.xml
+					classpath:applicationContext-workflow.xml
+					classpath:applicationContext-email.xml
 					/WEB-INF/applicationContext.xml
 					/WEB-INF/applicationContext-security.xml
 		</param-value>
