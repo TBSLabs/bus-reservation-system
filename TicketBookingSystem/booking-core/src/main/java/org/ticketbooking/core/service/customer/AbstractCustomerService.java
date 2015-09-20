@@ -1,9 +1,12 @@
 package org.ticketbooking.core.service.customer;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.ticketbooking.common.utils.ApplicationObjectUtils;
 import org.ticketbooking.core.api.jaxb.user.UserDetails;
 import org.ticketbooking.core.dao.customer.CustomerDao;
 import org.ticketbooking.core.domain.user.Address;
@@ -45,19 +48,42 @@ public abstract class AbstractCustomerService implements CustomerService{
 	
 	
 	public Customer updateCustomer(Customer customer) {
-		return customerDao.updateCustomer(customer);
+		Customer updatedCustomer = customerDao.updateCustomer(customer);
+		//TODO Update workflow to be included
+//		processCustomerUpdateWorkflow(updatedCustomer);
+		return updatedCustomer;
 	}
 	
+
 	public void deleteCustomer(Long id) {
 		customerDao.deleteCustomer(id);
 	}
 	
 	public Customer performCustomerCreation(UserDetails userDetails){
 		Customer customer = createCustomerFromPayload(userDetails);
-		processCustomerWorkflow(customer);
+		processCustomerCreateWorkflow(customer);
 		return customer;
 	}
 	
+	public Customer performCustomerUpdation(UserDetails details) {
+		Customer customer = findCustomerByUserName(details.getUserName());
+		if(ApplicationObjectUtils.isNotNull(details.getPassword()) && !customer.getPassword().equalsIgnoreCase(details.getPassword())){
+			customer.setPassword(details.getPassword());
+		}
+		if(ApplicationObjectUtils.isNotNull(details.getEmail()) && !customer.getEmail().equalsIgnoreCase(details.getEmail())){
+			customer.setEmail(details.getEmail());
+		}
+		if(ApplicationObjectUtils.isNotNull(details.getFirstName()) && !customer.getFirstName().equalsIgnoreCase(details.getFirstName())){
+			customer.setFirstName(details.getFirstName());
+		}
+		if(ApplicationObjectUtils.isNotNull(details.getLastName()) && !customer.getLastName().equalsIgnoreCase(details.getLastName())){
+			customer.setLastName(details.getLastName());
+		}
+		if(ApplicationObjectUtils.isNotNull(details.getMiddleName()) && !customer.getMiddleName().endsWith(details.getMiddleName())){
+			customer.setMiddleName(details.getMiddleName());
+		}
+		return updateCustomer(customer);
+	}
 	protected Customer createCustomerFromPayload(UserDetails userDetails) {
 		Customer customer = configuration.createObjectByBeanId("org.ticketbooking.core.domain.user.Customer");
 		customer.setUsername(userDetails.getUserName());
@@ -76,13 +102,25 @@ public abstract class AbstractCustomerService implements CustomerService{
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void processCustomerWorkflow(Customer customer) {
+	protected void processCustomerCreateWorkflow(Customer customer) {
 		CustomerWorkflowDTO customerWorkflowDTO = new CustomerWorkflowDTO();
 		customerWorkflowDTO.setCustomer(customer);
 		customerWorkflowDTO.setUserName(customer.getUsername());
 		Context<WorkflowDTO> context = new ProcessContext<WorkflowDTO>();
 		context.setWorkflowDto(customerWorkflowDTO);
-		
+		customerProcessor.doActivities(context);
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	private void processCustomerUpdateWorkflow(Customer updatedCustomer) {
+		CustomerWorkflowDTO customerWorkflowDTO = new CustomerWorkflowDTO();
+		customerWorkflowDTO.setCustomer(updatedCustomer);
+		customerWorkflowDTO.setUserName(updatedCustomer.getUsername());
+		Context<WorkflowDTO> context = new ProcessContext<WorkflowDTO>();
+		context.setWorkflowDto(customerWorkflowDTO);
+		Map<String,Object> attributes = new HashMap<String, Object>();
+		attributes.put("isUpdate", Boolean.TRUE);
+		context.setAttributes(attributes);
 		customerProcessor.doActivities(context);
 	}
 

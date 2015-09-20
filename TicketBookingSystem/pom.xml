@@ -8,6 +8,7 @@
 	<name>Ticket Booking System</name>
 	<description>Ticket Booking System</description>
 	<modules>
+		<module>booking-common</module>
 		<module>booking-core</module>
 		<module>booking-site</module>
 	</modules>
@@ -23,7 +24,17 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet.api.version}</version>
+			</dependency>
+			<dependency>
 				<artifactId>booking-core</artifactId>
+				<groupId>org.ticketbooking</groupId>
+				<version>1.0RC</version>
+			</dependency>
+			<dependency>
+				<artifactId>booking-common</artifactId>
 				<groupId>org.ticketbooking</groupId>
 				<version>1.0RC</version>
 			</dependency>
@@ -160,12 +171,9 @@
 				<artifactId>spring-security-config</artifactId>
 				<version>${spring-security.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-taglibs</artifactId>
-				<version>${spring-security.version}</version>
-			</dependency>
-
+			<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-taglibs</artifactId> 
+				<version>${spring-security.version}</version> <exclusions> <exclusion> <artifactId>org.springframework</artifactId> 
+				<groupId>spring-jdbc</groupId> </exclusion> </exclusions> </dependency> -->
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
@@ -270,11 +278,7 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>5.1.10</version>
 			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>${servlet.api.version}</version>
-			</dependency>
+
 			<!-- Swagger -->
 			<dependency>
 				<groupId>com.mangofactory</groupId>

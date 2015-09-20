@@ -19,12 +19,12 @@ public class CountryServiceImpl implements CountryService{
 	}
 
 	@Transactional(value="tbsTransaction",readOnly=true)
-	public void fetchCountry(Long id) {
-		countryDao.fetchCountry(id);
+	public Country fetchCountry(Long id) {
+		return countryDao.fetchCountry(id);
 	}
 
 	@Transactional(value="tbsTransaction",readOnly=true)
-	public void fetchCountryByName(String name) {
-		countryDao.fetchCountryByName(name);
+	public Country fetchCountryByName(String name) {
+		return countryDao.fetchCountryByName(name);
 	}
 }

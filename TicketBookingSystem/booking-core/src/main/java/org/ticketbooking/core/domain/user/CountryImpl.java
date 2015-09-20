@@ -1,7 +1,5 @@
 package org.ticketbooking.core.domain.user;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +19,7 @@ import org.ticketbooking.core.domain.other.LocaleImpl;
 @NamedQueries(value={
 		@NamedQuery(name="CountryImpl.fetchByCountryName",query="from CountryImpl where name = :name")
 })
-public class CountryImpl implements Serializable,Country{
+public class CountryImpl implements Country{
 	
 	/**
 	 * 

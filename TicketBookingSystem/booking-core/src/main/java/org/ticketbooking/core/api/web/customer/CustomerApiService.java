@@ -6,5 +6,5 @@ import org.ticketbooking.core.api.jaxb.user.UserDetails;
 
 public interface CustomerApiService {
 	Response createCustomer(UserDetails details);
-	Response updateCustomer(UserDetails details);
+	Response updateCustomer(String username,UserDetails details);
 }

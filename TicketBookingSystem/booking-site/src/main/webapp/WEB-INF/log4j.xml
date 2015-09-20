@@ -15,7 +15,16 @@
     <category name="org.ticketbooking">
         <priority value="ALL" />
     </category>
- 
+    
+    <category name="org.springframework">
+    	<priority value="off"/>
+    </category>
+ 	<category name="org.hibernate">
+ 		<priority value="off"/>
+ 	</category>
+ 	<category name="com.mangofactory">
+ 		<priority value="off"/>
+ 	</category>
  
     <!-- Root Logger trace/debug/info/warn/error/fatal/off> -->
     <root>

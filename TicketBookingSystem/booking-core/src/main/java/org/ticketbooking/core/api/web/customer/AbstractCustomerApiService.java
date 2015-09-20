@@ -14,4 +14,8 @@ public abstract class AbstractCustomerApiService implements CustomerApiService {
 	protected Customer performCustomerCreation(UserDetails userDetails) {
 		return customerService.performCustomerCreation(userDetails);
 	}
+
+	protected Customer performCustomerUpdation(UserDetails details) {
+		return customerService.performCustomerUpdation(details);
+	}
 }

@@ -41,4 +41,10 @@ public class CustomerServiceImpl extends AbstractCustomerService {
 		return super.performCustomerCreation(userDetails);
 	}
 	
+	@Transactional("tbsTransaction")
+	@Override
+	public Customer performCustomerUpdation(UserDetails details) {
+		return super.performCustomerUpdation(details);
+	}
+	
 }

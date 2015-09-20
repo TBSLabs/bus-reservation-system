@@ -10,4 +10,5 @@ public interface CustomerService {
 	Customer findCustomerById(Long id);
 	Customer findCustomerByUserName(String username);
 	Customer performCustomerCreation(UserDetails userDetails);
+	Customer performCustomerUpdation(UserDetails details);
 }

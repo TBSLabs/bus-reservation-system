@@ -17,9 +17,10 @@
 
     <bean id="openEntityManagerInViewFilter" class="org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter"/>
 
-    <bean id="tbsPreSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+    <bean id="tbsPreRequestFilterChain" class="org.springframework.security.web.FilterChainProxy">
         <sec:filter-chain-map request-matcher="ant">        
             <sec:filter-chain pattern="/**" filters="
+            	trsRequestFilter,
                 openEntityManagerInViewFilter" />
         </sec:filter-chain-map>
     </bean>

@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
         
-    <context:component-scan base-package="org.ticketbooking.core"/>
+    <context:component-scan base-package="org.ticketbooking.common,org.ticketbooking.core"/>
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
 			<value>classpath:config.properties</value>
@@ -37,8 +37,6 @@
             <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
             <prop key="hibernate.dialect">${hibernate.dialect}</prop>
             <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-            <prop key="javax.persistence.sql-load-script-source">classpth:seed-data/dml/dml.sql</prop>
-            <!-- <prop key="javax.persistence.ddl-drop-script-source"></prop> -->
          </props>
       </property>
    </bean>

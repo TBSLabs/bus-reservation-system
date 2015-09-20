@@ -11,6 +11,7 @@
 	<http>
 		<intercept-url pattern="/*" access="ROLE_USER" />
 		<http-basic />
+		<custom-filter ref="tbsPreRequestFilterChain" before="CHANNEL_FILTER"/>
 	</http>
 	
 	<authentication-manager>

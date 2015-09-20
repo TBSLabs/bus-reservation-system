@@ -1,14 +1,12 @@
 package org.ticketbooking.site.api.core;
 
-import javax.ws.rs.ApplicationPath;
-
 import org.apache.log4j.Logger;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.ticketbooking.core.api.web.CheckBookingStatus;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 
-@ApplicationPath("/api/v1/*")
+//@ApplicationPath("/api/v1/*")
 public class ApiApplicationConfiguration extends ResourceConfig{
 	final static Logger LOGGER = Logger.getLogger(ApiApplicationConfiguration.class);
 	public ApiApplicationConfiguration(){

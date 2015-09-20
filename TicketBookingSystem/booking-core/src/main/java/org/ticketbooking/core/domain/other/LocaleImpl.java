@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ import org.ticketbooking.core.domain.user.CountryImpl;
 
 @Entity
 @Table(name="TBS_LOCALE")
+@NamedQuery(name="LocaleImpl.fetchByLocaleName",query="from LocaleImpl locale where locale.name=:localeName")
 public class LocaleImpl implements Locale{	
 	/**
 	 * 

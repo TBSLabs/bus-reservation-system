@@ -1,26 +1,58 @@
 package org.ticketbooking.core.domain.user;
 
 import java.io.Serializable;
+import java.util.Map;
+
+import org.ticketbooking.core.domain.common.audit.Auditable;
+
 
 public interface Customer extends Serializable {
-	public Long getId();
-	public void setId(Long id);
-	public String getUsername();
-	public void setUsername(String username);
-	public String getPassword();
-	public void setPassword(String password);
-	public String getFirstName();
-	public void setFirstName(String firstName);
-	public String getLastName();
-	public void setLastName(String lastName);
-	public String getMiddleName();
-	public void setMiddleName(String middleName);
-	public String getEmail();
-	public void setEmail(String email);
-	public String getPhone();
-	public void setPhone(String phone);
-	public boolean isActive();
-	public void setActive(boolean isActive);
-	public boolean isVarified();
-	public void setVarified(boolean isVarified);
+	Long getId();
+
+	void setId(Long id);
+
+	String getUsername();
+
+	void setUsername(String username);
+
+	String getPassword();
+
+	void setPassword(String password);
+
+	String getFirstName();
+
+	void setFirstName(String firstName);
+
+	String getLastName();
+
+	void setLastName(String lastName);
+
+	String getMiddleName();
+
+	void setMiddleName(String middleName);
+
+	String getEmail();
+
+	void setEmail(String email);
+
+	String getPhone();
+
+	void setPhone(String phone);
+
+	boolean isActive();
+
+	void setActive(boolean isActive);
+
+	boolean isVarified();
+
+	void setVarified(boolean isVarified);
+
+	Auditable getAuditable();
+
+	void setAuditable(Auditable auditable);
+
+	Map<String, CustomerAdditionalDetails> getCustomerAdditional();
+
+	void setCustomerAdditional(Map<String, CustomerAdditionalDetails> customerAdditional);
+
 }

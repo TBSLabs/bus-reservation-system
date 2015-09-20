@@ -1,10 +1,13 @@
 package org.ticketbooking.core.dao.address.state;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.ticketbooking.common.utils.ApplicationObjectUtils;
 import org.ticketbooking.core.domain.user.State;
 import org.ticketbooking.core.domain.user.StateImpl;
 
@@ -22,10 +25,12 @@ public class StateDaoImpl implements StateDao{
 		return entityManager.find(StateImpl.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public State fetchStateByName(String name) {
 		Query query = entityManager.createNamedQuery("StateImpl.fetchByStateName");
 		query.setParameter("name", name);
-		return (StateImpl) query.getSingleResult();
+		List<State> states = query.getResultList();
+		return ApplicationObjectUtils.isNull(states) || states.isEmpty() ? null : states.get(0);
 	}
 
 }

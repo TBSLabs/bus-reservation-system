@@ -13,10 +13,13 @@ import org.apache.velocity.app.VelocityEngine;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.ticketbooking.common.annotation.log.Log;
 
 @Service("emailService")
 public class EmailServiceImpl implements EmailService{
-	private static final Logger LOGGER = Logger.getLogger(EmailServiceImpl.class);
+	
+	@Log
+	Logger logger;
 	
 	private static final String TEMPLATES_LOCATIONS="emailTemplates";
 	
@@ -43,7 +46,7 @@ public class EmailServiceImpl implements EmailService{
 		try{
 			mailSender.send(mailMessage);
 		}catch(Exception exception){
-			LOGGER.error(exception);
+			logger.error(exception);
 		}
 	}
 }

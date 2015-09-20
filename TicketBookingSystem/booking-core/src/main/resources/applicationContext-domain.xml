@@ -20,4 +20,6 @@
     <bean id="org.ticketbooking.core.domain.user.State" class="org.ticketbooking.core.domain.user.StateImpl" scope="prototype"/>
     <bean id="org.ticketbooking.core.domain.user.Country" class="org.ticketbooking.core.domain.user.CountryImpl" scope="prototype"/>
     <bean id="org.ticketbooking.core.domain.other.Locale" class="org.ticketbooking.core.domain.other.LocaleImpl" scope="prototype"/>
+    <!-- For POJOS -->
+    <bean id="org.ticketbooking.core.api.exception.ErrorDecorator" class="org.ticketbooking.core.api.exception.ErrorDecorator" scope="prototype"/>
 </beans>

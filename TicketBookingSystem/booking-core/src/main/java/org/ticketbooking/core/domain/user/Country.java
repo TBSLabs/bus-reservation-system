@@ -1,9 +1,11 @@
 package org.ticketbooking.core.domain.user;
 
+import java.io.Serializable;
+
 import org.ticketbooking.core.domain.other.Locale;
 
-public interface Country {
-	public Long getId();
+public interface Country extends Serializable{
+	public Long getId(); 
 	public void setId(Long id);
 	public String getName();
 	public void setName(String name);

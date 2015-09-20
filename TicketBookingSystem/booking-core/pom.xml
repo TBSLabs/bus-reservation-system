@@ -12,6 +12,11 @@
 	<description>Booking Core App</description>
 	<dependencies>
 
+		<!-- Common Module -->
+		<dependency>
+			<artifactId>booking-common</artifactId>
+			<groupId>org.ticketbooking</groupId>
+		</dependency>
 		<!-- MYSQL -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -41,7 +46,7 @@
 		</dependency>
 
 		<!-- Spring 4 dependencies -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 		</dependency>
@@ -73,7 +78,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
-
+ -->
 
 		<dependency>
 			<groupId>org.glassfish.jersey.ext</groupId>
@@ -127,11 +132,6 @@
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 		<!-- Dependency for JAXB -->
 		<dependency>
@@ -147,10 +147,10 @@
 			<artifactId>javax.ws.rs-api</artifactId>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<!-- To give Mail Support -->
 		<dependency>
