@@ -42,6 +42,7 @@ public class SQLScriptUtils {
 	 * */
 	public static int executeScript(Connection connection, File scriptFile,boolean isCommenetIncluded){
 		if(hasAlreadySeedData(connection)){
+			nullifyDatabaseObjects(connection, null, null);
 			return 0;
 		}
 		FileInputStream fis = null;
