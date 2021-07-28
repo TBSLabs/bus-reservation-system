@@ -14,7 +14,7 @@
 	</modules>
 	<properties>
 		<jersey.version>2.11</jersey.version>
-		<spring.version>4.1.4.RELEASE</spring.version>
+		<spring.version>4.3.21.RELEASE</spring.version>
 		<spring-security.version>3.2.0.RELEASE</spring-security.version>
 		<mongo.version>2.10.1</mongo.version>
 		<jax-rs-version>2.0</jax-rs-version>
